@@ -3,18 +3,33 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include <vector>
+#include "Vector3D.h"
 
 class EmptyScene : public Scene {
 public:
     explicit EmptyScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
-        // Ejemplo: Creación de una esfera usando las utilidades de render existentes
-        physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(2.0f));
+		// Origen del eje de coordenadas
+        physx::PxShape* origen = CreateShape(physx::PxSphereGeometry(1.0f));
         m_transform = physx::PxTransform(physx::PxVec3(0.0f, 0.0f, 0.0f));
+        m_renderItem = new RenderItem(origen, &m_transform, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
-        // Se registra el RenderItem exactamente como en la plantilla original
-        m_renderItem = new RenderItem(shape, &m_transform, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        Vector3D u(5.0f, 0.0f, 0.0f);
+        Vector3D v(0.0f, 5.0f, 0.0f);
+        Vector3D w(0.0f, 0.0f, 5.0f);
+
+        physx::PxShape* X = CreateShape(physx::PxSphereGeometry(1.0f));
+        m_transform1 = physx::PxTransform(u);
+        m_renderItem = new RenderItem(X, &m_transform1, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+
+        physx::PxShape* Y = CreateShape(physx::PxSphereGeometry(1.0f));
+        m_transform2 = physx::PxTransform(v);
+        m_renderItem = new RenderItem(Y, &m_transform2, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+
+        physx::PxShape* Z = CreateShape(physx::PxSphereGeometry(1.0f));
+        m_transform3 = physx::PxTransform(w);
+        m_renderItem = new RenderItem(Z, &m_transform3, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
     }
 
     void update(double dt) override {
@@ -37,5 +52,8 @@ public:
 
 private:
     physx::PxTransform m_transform;
+    physx::PxTransform m_transform1;
+    physx::PxTransform m_transform2;
+    physx::PxTransform m_transform3;
     RenderItem* m_renderItem{ nullptr };
 };
