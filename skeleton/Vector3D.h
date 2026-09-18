@@ -21,6 +21,8 @@ public:
 	Vector3D operator*(float) const;
 	Vector3D& operator+=(const Vector3D&);
 
+	operator physx::PxVec3() const;
+
 private:
 
 };

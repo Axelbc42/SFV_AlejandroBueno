@@ -52,3 +52,7 @@
 		z += other.z;
 		return *this;
 	}
+
+	Vector3D::operator physx::PxVec3() const {
+		return physx::PxVec3(x, y, z);
+	}
