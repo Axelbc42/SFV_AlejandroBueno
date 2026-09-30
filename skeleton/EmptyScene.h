@@ -23,7 +23,7 @@ public:
             axis_renderItemOrigins.push_back(new RenderItem(X, &axis_transforms.back(), Vector4(p.x, p.y, p.z, 1.0f)));
         }
 
-        p = new Particle(Vector3D(0, 0, 0), Vector3D(0, 0, 10));
+        p = new Particle(Vector3D(0, 0, 0), Vector3D(0, 0, 5));
     }
 
 
