@@ -13,46 +13,25 @@ Particle::~Particle() {
 }
 
 void Particle::integrateEuler(double t) {
-	pose.p.x = pose.p.x + t * vel.x;
-	pose.p.y = pose.p.y + t * vel.y;
-	pose.p.z = pose.p.z + t * vel.z;
-
-	vel.x = vel.x + (t * acc.x);
-	vel.y = vel.y + (t * acc.y);
-	vel.z = vel.z + (t * acc.z);
-
-	double d = std::pow(damping, t);
-	vel.x *= d;
-	vel.y *= d;
-	vel.z *= d;
+	pose.p = pose.p + vel * t;
+	vel = (vel + acc * t) * std::pow(damping, t);
 }
 
 void Particle::integrateEulerSI(double t) {
-	vel.x += t * acc.x;
-	vel.y += t * acc.y;
-	vel.z += t * acc.z;
-
-	double d = std::pow(damping, t);
-	vel.x *= d;
-	vel.y *= d;
-	vel.z *= d;
-
-	pose.p.x = pose.p.x + t * vel.x;
-	pose.p.y = pose.p.y + t * vel.y;
-	pose.p.z = pose.p.z + t * vel.z;
+	vel = (vel + acc * t) * std::pow(damping, t);
+	pose.p = pose.p + vel * t;
 }
 
 void Particle::integrateVerlet(double t) {
-	Vector3D currentPos = pose.p;
-	double d = std::pow(damping, t);
+	physx::PxVec3 currentPos = pose.p;
 
 	if (firstVerletStep) {
 		integrateEulerSI(t);
+		firstVerletStep = false;
 	}
 	else {
-		pose.p.x = currentPos.x + (currentPos.x - prevPos.x) * d + t * t * acc.x;
-		pose.p.y = currentPos.y + (currentPos.y - prevPos.y) * d + t * t * acc.y;
-		pose.p.z = currentPos.z + (currentPos.z - prevPos.z) * d + t * t * acc.z;
+		pose.p = currentPos + (currentPos - prevPos) * std::pow(damping, t) + acc * t * t;
+		vel = (pose.p - prevPos) / (2.0 * t);
 	}
 	prevPos = currentPos;
 }
