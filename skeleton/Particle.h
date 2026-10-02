@@ -5,16 +5,17 @@
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, double damping = 0.99);
+	Particle(Vector3D Pos, Vector3D Vel, float m = 0, double damping = 0.99);
 	~Particle();
 
 	void integrateEuler(double t);
 	void integrateEulerSI(double t);
 	void integrateVerlet(double t);		// Ns porq va mas rapido
 
-private:
+protected:
 	Vector3D vel;
 	Vector3D acc;
+	float mass;
 	double damping;
 	bool firstVerletStep = true;
 

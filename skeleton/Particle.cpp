@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3D Pos, Vector3D Vel, double Damping) : vel(Vel), pose(Pos), damping(Damping) {
+Particle::Particle(Vector3D Pos, Vector3D Vel, float m, double Damping) : vel(Vel), pose(Pos), mass(m), damping(Damping) {
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(1.0f)), &pose, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 }
 
