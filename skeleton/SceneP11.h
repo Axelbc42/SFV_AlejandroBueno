@@ -1,13 +1,12 @@
 #pragma once
-
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include <vector>
 #include "Particle.h"
 
-class EmptyScene : public Scene {
+class SceneP11 : public Scene {
 public:
-    explicit EmptyScene(std::string name) : Scene(std::move(name)) {}
+    explicit SceneP11(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
         std::vector<Vector3D> pos;
@@ -16,7 +15,7 @@ public:
         pos.push_back(Vector3D(0.0f, 1.0f, 0.0f));
         pos.push_back(Vector3D(0.0f, 0.0f, 1.0f));
 
-        axis_transforms.reserve(pos.size());  // <- reserva capacidad fija de antemano
+        axis_transforms.reserve(pos.size());
         for (Vector3D p : pos) {
             physx::PxShape* X = CreateShape(physx::PxSphereGeometry(1.0f));
             axis_transforms.push_back(physx::PxTransform(p * 5));
@@ -26,14 +25,9 @@ public:
         p = new Particle(Vector3D(0, 0, 0), Vector3D(0, 0, 5));
     }
 
-
     void update(double dt) override {
         // Lógica/Integración del alumno (por ejemplo, movimiento simple)
         p->integrateVerlet(dt);
-    }
-
-    void keyPress(unsigned char key, const physx::PxTransform& camera) override {
-
     }
 
     void cleanup() override {

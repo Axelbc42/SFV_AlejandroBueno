@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3D Pos, Vector3D Vel, float m, double Damping) : vel(Vel), pose(Pos), mass(m), damping(Damping) {
+Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, double Damping) : vel(Vel), acc(Acc), pose(Pos), mass(m), damping(Damping) {
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(1.0f)), &pose, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 }
 
@@ -28,18 +28,18 @@ void Particle::integrateEuler(double t) {
 }
 
 void Particle::integrateEulerSI(double t) {
-	pose.p.x = pose.p.x + t * vel.x;
-	pose.p.y = pose.p.y + t * vel.y;
-	pose.p.z = pose.p.z + t * vel.z;
+	vel.x += t * acc.x;
+	vel.y += t * acc.y;
+	vel.z += t * acc.z;
 
 	double d = std::pow(damping, t);
 	vel.x *= d;
 	vel.y *= d;
 	vel.z *= d;
 
-	pose.p.x = pose.p.x + (t * vel.x);
-	pose.p.y = pose.p.y + (t * vel.y);
-	pose.p.z = pose.p.z + (t * vel.z);
+	pose.p.x = pose.p.x + t * vel.x;
+	pose.p.y = pose.p.y + t * vel.y;
+	pose.p.z = pose.p.z + t * vel.z;
 }
 
 void Particle::integrateVerlet(double t) {
