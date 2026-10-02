@@ -29,7 +29,6 @@ public:
 
     void update(double dt) override {
         // Lógica/Integración del alumno (por ejemplo, movimiento simple)
-        //m_transform.p.y -= static_cast<float>(9.8 * dt);
         p->integrateVerlet(dt);
     }
 

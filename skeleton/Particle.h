@@ -12,10 +12,6 @@ public:
 	void integrateEulerSI(double t);
 	void integrateVerlet(double t);		// Ns porq va mas rapido
 
-	void setVel(Vector3D Vel);
-	void setAcc(Vector3D Acc);
-	void setdamping(float Damping);
-
 private:
 	Vector3D vel;
 	Vector3D acc;

@@ -26,6 +26,7 @@ void Particle::integrateEuler(double t) {
 	vel.y *= d;
 	vel.z *= d;
 }
+
 void Particle::integrateEulerSI(double t) {
 	pose.p.x = pose.p.x + t * vel.x;
 	pose.p.y = pose.p.y + t * vel.y;
@@ -40,6 +41,7 @@ void Particle::integrateEulerSI(double t) {
 	pose.p.y = pose.p.y + (t * vel.y);
 	pose.p.z = pose.p.z + (t * vel.z);
 }
+
 void Particle::integrateVerlet(double t) {
 	Vector3D currentPos = pose.p;
 	double d = std::pow(damping, t);
@@ -54,7 +56,3 @@ void Particle::integrateVerlet(double t) {
 	}
 	prevPos = currentPos;
 }
-
-void Particle::setVel(Vector3D Vel) { vel = Vel; }
-void Particle::setAcc(Vector3D Acc) { acc = Acc; }
-void Particle::setdamping(float Damping) { damping = Damping; }
