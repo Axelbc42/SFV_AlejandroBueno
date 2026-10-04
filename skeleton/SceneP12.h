@@ -3,6 +3,7 @@
 #include "RenderUtils.hpp"
 #include <vector>
 #include "Particle.h"
+#include "Projectile.h"
 
 class SceneP12 : public Scene {
 public:
@@ -24,18 +25,26 @@ public:
     }
 
     void update(double dt) override {
-
+        for (auto p : projectiles)
+            p->update(dt);
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
-        switch (key)
-        {
+        Vector3D cameraDir;
+        switch (key) {
+			// Disparar bala de canon
             case '1':
-                // Crear un proyectil con velocidad inicial en la dirección de la cámara
-                projectiles.push_back(camera);
-                physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.5f));
-                projectile_renderItemOrigins.push_back(new RenderItem(sphereShape, &projectiles.back(), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
-				break;
+                cameraDir = GetCamera()->getDir();
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 50, cameraDir * 250, 15));
+                contadorProyectiles++;
+                break;
+
+			// Disparar bala de pistola
+            case '2':
+                cameraDir = GetCamera()->getDir();
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 330, cameraDir * 330, 0.008));
+                contadorProyectiles++;
+                break;
         default:
             break;
         }
@@ -52,9 +61,10 @@ public:
     }
 
 private:
+	int contadorProyectiles = 0;
+
     std::vector<physx::PxTransform> axis_transforms;
     std::vector<RenderItem*> axis_renderItemOrigins;
 
-    std::vector<physx::PxTransform> projectiles;
-    std::vector<RenderItem*> projectile_renderItemOrigins;
+    std::vector<Projectile*> projectiles = std::vector<Projectile*>();
 };

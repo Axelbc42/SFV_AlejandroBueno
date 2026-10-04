@@ -4,7 +4,7 @@
 
 	Vector3D::Vector3D(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 
-	Vector3D::Vector3D(physx::PxVec3 PxV3) : x(PxV3.x), y(PxV3.x), z(PxV3.z) {}
+	Vector3D::Vector3D(physx::PxVec3 PxV3) : x(PxV3.x), y(PxV3.y), z(PxV3.z) {}
 
 	float Vector3D::magnitude() const {
 		return sqrtf(x * x + y * y + z * z);
