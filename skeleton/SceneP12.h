@@ -33,6 +33,12 @@ public:
                 cameraDir = GetCamera()->getDir();
 			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 330, cameraDir * 330, 0.008, 0.25f));
                 break;
+
+			// Lanzar una piedra con la mano
+            case '3':
+                cameraDir = GetCamera()->getDir();
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, 0.4f, 0.3f));
+                break;
         default:
             break;
         }
