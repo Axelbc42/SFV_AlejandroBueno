@@ -1,6 +1,6 @@
 #include "Projectile.h"
 
-Projectile::Projectile(Vector3D Pos, Vector3D vS, Vector3D vR, float mR, double damping) : Particle(Pos, vS, Vector3D(0, 0, 0), damping), velReal(vR){
+Projectile::Projectile(Vector3D Pos, Vector3D vS, Vector3D vR, float mR, float rR, double damping) : Particle(Pos, vS, Vector3D(0, 0, 0), 0, rR, damping), velReal(vR){
 	scaleMass(mR);
 	scaleGravity();
 }
@@ -16,11 +16,6 @@ void Projectile::scaleGravity(float gR) {
 	float vSM = vel.magnitude();
 	gravity = (vSM * vSM * gR) / (vRM * vRM);
 	acc = Vector3D(0, -gravity, 0);
-}
-
-void Projectile::changeMass(float mR) {
-	scaleMass(mR);
-	scaleGravity(gravity);
 }
 
 void Projectile::update(double t) {
