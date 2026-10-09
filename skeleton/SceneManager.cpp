@@ -57,3 +57,12 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
         m_currentScene->keyPress(key, cameraTransform);
     }
 }
+
+void SceneManager::ShutDown() {
+    if (m_currentScene) {
+        m_currentScene->cleanup();
+        m_currentScene.reset();
+    }
+    m_hasPendingChange = false;
+    m_pendingSceneName.clear();
+}

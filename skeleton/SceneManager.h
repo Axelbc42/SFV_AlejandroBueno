@@ -39,6 +39,8 @@ public:
     // Devuelve un puntero a la escena actual (no toma propiedad).
     [[nodiscard]] Scene* getCurrentScene() const { return m_currentScene.get(); }
 
+    void ShutDown();
+
 private:
     SceneManager() = default;
 

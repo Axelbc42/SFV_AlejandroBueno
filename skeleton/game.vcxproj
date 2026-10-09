@@ -264,6 +264,8 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
+    <ClCompile Include="ParticleSistem.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
@@ -275,6 +277,8 @@
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="ParticleSistem.h" />
     <ClInclude Include="SceneP11.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Projectile.h" />

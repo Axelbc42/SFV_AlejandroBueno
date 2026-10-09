@@ -31,13 +31,33 @@ public:
 			// Disparar bala de pistola
             case '2':
                 cameraDir = GetCamera()->getDir();
-			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 330, cameraDir * 330, 0.008, 0.25f));
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 250, cameraDir * 330, 0.008, 0.25f));
                 break;
 
 			// Lanzar una piedra con la mano
             case '3':
                 cameraDir = GetCamera()->getDir();
-			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, 0.4f, 0.3f));
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, masaReal, 0.3f));
+                break;
+
+			// Lanzar un proyectil personalizado
+            case '4':
+                cameraDir = GetCamera()->getDir();
+			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, masaReal, 0.3f));
+                break;
+
+			// Subir masa del proyectil personalizado
+            case '+':
+                masaReal += 10;
+                std::cout << "Nueva masa = " << masaReal << std::endl;
+                break;
+
+			// Bajar masa del proyectil personalizado
+            case '-':
+                if (masaReal >= 10) {
+                    masaReal -= 10;
+                    std::cout << "Nueva masa = " << masaReal << std::endl;
+                }
                 break;
         default:
             break;
@@ -50,12 +70,14 @@ public:
             floorRenderItem = nullptr;
         }
         for (auto p : projectiles) 
-            delete p;
+            p = nullptr;
         projectiles.clear();
     }
 
 private:
     std::vector<Projectile*> projectiles = std::vector<Projectile*>();
+
+    float masaReal = 10;
 
     physx::PxTransform floor;
     RenderItem* floorRenderItem = nullptr;
