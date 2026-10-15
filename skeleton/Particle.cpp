@@ -1,8 +1,33 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, double Damping) : vel(Vel), acc(Acc), pose(Pos), mass(m), damping(Damping) {
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(r)), &pose, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, float life, Vector4 color, double Damping) :
+	vel(Vel), acc(Acc), pose(Pos), mass(m), damping(Damping), lifeTime(life) {
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(r)), &pose, color);
+}
+
+Particle::Particle() : vel(0, 0, 0), acc(0, 0, 0), mass(1.0f), damping(0.99), lifeTime(0.0f) {}
+
+void Particle::activate(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, double Damping, float Life, Vector4 color) {
+	deactivate();                       // por si acaso tenía un RenderItem
+
+	pose = physx::PxTransform(Pos);
+	vel = Vel;
+	acc = Acc;
+	mass = m;
+	damping = Damping;
+	lifeTime = Life;
+	life = 0.0f;
+
+	firstVerletStep = true;
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(r)), &pose, color);
+}
+
+void Particle::deactivate() {
+	if (renderItem) {
+		renderItem->release();
+		renderItem = nullptr;
+	}
 }
 
 Particle::~Particle() {
@@ -10,6 +35,12 @@ Particle::~Particle() {
 		renderItem->release();
 		renderItem = nullptr;
 	}
+}
+
+bool Particle::updateLife(double t) {
+	integrateEulerSI(t);
+	life += (float)t;
+	return life < lifeTime;
 }
 
 void Particle::integrateEuler(double t) {
