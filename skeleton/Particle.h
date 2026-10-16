@@ -5,7 +5,7 @@
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc = Vector3D(0,0,0), float m = 0, float r = 0, float lifeTime = 0.0f, Vector4 color = Vector4(1, 0, 0, 1), double damping = 0.99);
+	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc = Vector3D(0,0,0), float m = 0, float r = 1, float lifeTime = 0.0f, Vector4 color = Vector4(1, 0, 0, 1), double damping = 0.99);
 	Particle();
 	~Particle();
 

@@ -23,25 +23,25 @@ public:
         Vector3D cameraDir;
         switch (key) {
 			// Disparar bala de canon
-            case '1':
+            case 'v':
                 cameraDir = GetCamera()->getDir();
 			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 50, cameraDir * 250, 15, 1.0f));
                 break;
 
 			// Disparar bala de pistola
-            case '2':
+            case 'b':
                 cameraDir = GetCamera()->getDir();
 			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 250, cameraDir * 330, 0.008, 0.25f));
                 break;
 
 			// Lanzar una piedra con la mano
-            case '3':
+            case 'n':
                 cameraDir = GetCamera()->getDir();
 			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, masaReal, 0.3f));
                 break;
 
 			// Lanzar un proyectil personalizado
-            case '4':
+            case 'm':
                 cameraDir = GetCamera()->getDir();
 			    projectiles.push_back(new Projectile(GetCamera()->getEye(), cameraDir * 25, cameraDir * 25, masaReal, 0.3f));
                 break;

@@ -105,10 +105,12 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	// Registrar las prácticas/escenas del curso
-	SceneManager::instance().registerScene<SceneP2>("EscenaVacia");
+	SceneManager::instance().registerScene<SceneP11>("Escena1");
+	SceneManager::instance().registerScene<SceneP12>("Escena2");
+	SceneManager::instance().registerScene<SceneP2>("Escena3");
 	
 	// Cargar la escena inicial
-	SceneManager::instance().changeScene("EscenaVacia");
+	SceneManager::instance().changeScene("Escena3");
 	
 }
 
