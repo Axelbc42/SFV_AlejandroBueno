@@ -1,14 +1,11 @@
 #pragma once
-#include "Vector3D.h"
+#include "Particle.h"
 class ForceGenerator
 {
 public:
-	ForceGenerator(Vector3D f) : force(f) {}
-	~ForceGenerator();
-
-	Vector3D const getForce() { return force; }
-
-protected:
-	Vector3D force;
+public:
+    virtual ~ForceGenerator() = default;
+    virtual void updateForce(Particle* p, double dt) = 0;
+    virtual void update(double dt) {}       // para los dinámicos (explosión)
 };
 
