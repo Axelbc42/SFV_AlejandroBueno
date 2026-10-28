@@ -23,7 +23,7 @@ public:
 	//void clearForce() { force = Vector3D(0, 0, 0); }
 	float getMass() const { return mass; }
 	//float getInvMass() const { return invMass; }
-	//Vector3D getVel() const { return vel; }
+	Vector3D getVel() const { return vel; }
 	bool isAlive() const { return alive; }
 
 	bool updateLife(double t);

@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include "ParticleSystem.h"
-
+#include "GravityGenerator.h"
 
 class SceneP2 : public Scene {
 public:
@@ -18,6 +18,7 @@ public:
             4.0f, 0.5f,                                     // vida: media, desviación típica
             0.2f, 0.99, 1.0f,                               // radio, damping, escala de gravedad
             Vector4(0.2f, 0.5f, 1.0f, 1.0f)));
+        fuente->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(fuente));
 
         // 2) Niebla: posición muy variable, velocidades pequeñas, partículas pequeñas y transparentes
@@ -29,6 +30,7 @@ public:
             6.0f, 1.0f,
             0.1f, 0.99, 0.0f,                               // sin gravedad: flota
             Vector4(0.8f, 0.8f, 0.8f, 0.15f)));
+        niebla->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(niebla));
 
         // 3) Chispas: velocidad uniforme (mín/máx por eje), vida corta, color cálido
@@ -40,6 +42,7 @@ public:
             1.2f, 0.3f,
             0.15f, 0.95, 1.0f,
             Vector4(1.0f, 0.5f, 0.0f, 1.0f)));
+        chispas->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(chispas));
     }
 
