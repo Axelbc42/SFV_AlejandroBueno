@@ -7,7 +7,7 @@ class ParticleGenerator {
 public:
 	ParticleGenerator(Vector3D pos, Vector3D posVar, bool gauss, Vector3D MeanOrMin, Vector3D MeanOrMax,
 		float pMean, float pVar, float lMean, float lVar,
-		float r, double d, float g, Vector4 c);
+		float r, double d, Vector4 c);
 
 	int numToEmit();
 	void setup(Particle& p, const Vector3D& g);

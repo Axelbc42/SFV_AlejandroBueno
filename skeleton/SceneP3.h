@@ -16,7 +16,7 @@ public:
             true, Vector3D(0, 25, 0), Vector3D(3, 2, 3),
             4, 2,
             4.0f, 0.5f,
-            0.2f, 0.99, 1.0f,
+            0.2f, 0.99,
             Vector4(0.2f, 0.5f, 1.0f, 1.0f)));
         fuente->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         fuente->addForceGenerator(std::make_shared<WindGenerator>(Vector3D(15, 0, 0), Vector3D(0, 10, 0), 20.0f, 0.5f));
@@ -28,8 +28,9 @@ public:
             true, Vector3D(0, 0.5f, 0), Vector3D(0.5f, 0.3f, 0.5f),
             5, 2,
             6.0f, 1.0f,
-            0.1f, 0.99, 0.0f,
+            0.25f, 0.99,
             Vector4(0.8f, 0.8f, 0.8f, 0.15f)));
+        niebla->addForceGenerator(std::make_shared<WindGenerator>(Vector3D(5, 5, 0), Vector3D(30, 0, 0), 20.0f, 0.5f));
         systems.push_back(std::move(niebla));
 
         auto chispas = std::make_unique<ParticleSystem>(1000);
@@ -38,7 +39,7 @@ public:
             false, Vector3D(-6, 11, -6), Vector3D(6, 19, 6),
             6, 3,
             1.2f, 0.3f,
-            0.15f, 0.95, 1.0f,
+            0.15f, 0.95,
             Vector4(1.0f, 0.5f, 0.0f, 1.0f)));
         chispas->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(chispas));

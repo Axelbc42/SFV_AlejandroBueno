@@ -8,12 +8,11 @@ Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, f
 
 Particle::Particle() : vel(0, 0, 0), acc(0, 0, 0), mass(0.1f), invMass(1/ 0.1f), damping(0.99), lifeTime(0.0f) {}
 
-void Particle::activate(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, double Damping, float Life, Vector4 color) {
+void Particle::activate(Vector3D Pos, Vector3D Vel, float m, float r, double Damping, float Life, Vector4 color) {
 	deactivate();                       // por si acaso tenía un RenderItem
 
 	pose = physx::PxTransform(Pos);
 	vel = Vel;
-	acc = Acc;
 	mass = m;
 	invMass = 1.0f / m;
 	damping = Damping;

@@ -16,7 +16,7 @@ public:
             true, Vector3D(0, 25, 0), Vector3D(3, 2, 3),    // gaussiana: media, desviación típica
             4, 2,                                           // partículas por frame: media, variación
             4.0f, 0.5f,                                     // vida: media, desviación típica
-            0.2f, 0.99, 1.0f,                               // radio, damping, escala de gravedad
+            0.2f, 0.99,                               // radio, damping, escala de gravedad
             Vector4(0.2f, 0.5f, 1.0f, 1.0f)));
         fuente->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(fuente));
@@ -28,7 +28,7 @@ public:
             true, Vector3D(0, 0.5f, 0), Vector3D(0.5f, 0.3f, 0.5f),
             5, 2,
             6.0f, 1.0f,
-            0.1f, 0.99, 0.0f,                               // sin gravedad: flota
+            0.1f, 0.99,                               // sin gravedad: flota
             Vector4(0.8f, 0.8f, 0.8f, 0.15f)));
         niebla->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(niebla));
@@ -40,7 +40,7 @@ public:
             false, Vector3D(-6, 11, -6), Vector3D(6, 19, 6),  // uniforme: mínimo, máximo
             6, 3,
             1.2f, 0.3f,
-            0.15f, 0.95, 1.0f,
+            0.15f, 0.95,
             Vector4(1.0f, 0.5f, 0.0f, 1.0f)));
         chispas->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
         systems.push_back(std::move(chispas));

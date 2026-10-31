@@ -2,7 +2,7 @@
 
 ParticleGenerator::ParticleGenerator(Vector3D pos, Vector3D posVar, bool gauss, Vector3D MeanOrMin, Vector3D VarOrMax,
 	float pMean, float pVar, float lMean, float lVar,
-	float r, double d, float g, Vector4 c) :
+	float r, double d, Vector4 c) :
 	position(pos), positionVar(posVar), gaussianVel(gauss), 
 	particlesMean(pMean), particlesVar(pVar), lifeMean(lMean), lifeVar(lVar),
 	radius(r), damping(d), color(c) {
@@ -49,5 +49,5 @@ void ParticleGenerator::setup(Particle& p, const Vector3D& g) {
 	else
 		v = uniformVel();
 
-	p.activate(pos, v, g, 1.0f, radius, damping, lifeDist(rng), color);
+	p.activate(pos, v, 1.0f, radius, damping, lifeDist(rng), color);
 }

@@ -9,7 +9,7 @@ public:
 	Particle();
 	~Particle();
 
-	void activate(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, double Damping, float life, Vector4 color);
+	void activate(Vector3D Pos, Vector3D Vel, float m, float r, double Damping, float life, Vector4 color);
 	void deactivate();
 
 	Particle(const Particle&) = delete;
