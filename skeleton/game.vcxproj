@@ -272,6 +272,7 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TornadoGenerator.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
   </ItemGroup>
@@ -294,6 +295,7 @@
     <ClInclude Include="SceneP12.h" />
     <ClInclude Include="SceneP2.h" />
     <ClInclude Include="SceneP3.h" />
+    <ClInclude Include="TornadoGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="WindGenerator.h" />
   </ItemGroup>

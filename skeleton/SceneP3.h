@@ -4,6 +4,7 @@
 #include "ParticleSystem.h"
 #include "GravityGenerator.h"
 #include "WindGenerator.h"
+#include "TornadoGenerator.h"
 
 class SceneP3 : public Scene {
 public:
@@ -19,18 +20,18 @@ public:
             0.2f, 0.99,
             Vector4(0.2f, 0.5f, 1.0f, 1.0f)));
         fuente->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(0, -9.8, 0)));
-        fuente->addForceGenerator(std::make_shared<WindGenerator>(Vector3D(15, 0, 0), Vector3D(0, 10, 0), 20.0f, 0.5f));
+        fuente->addForceGenerator(std::make_shared<WindGenerator>(Vector3D(0, 0, 15), Vector3D(0, 10, 0), 20.0f, 0.5f));
         systems.push_back(std::move(fuente));
 
         auto niebla = std::make_unique<ParticleSystem>(1000, 50);
         niebla->addEmitter(ParticleGenerator(
-            Vector3D(30, 2, 0), Vector3D(15, 2, 15),
+            Vector3D(30, 2, 0), Vector3D(10, 2, 10),
             true, Vector3D(0, 0.5f, 0), Vector3D(0.5f, 0.3f, 0.5f),
             5, 2,
             6.0f, 1.0f,
             0.25f, 0.99,
             Vector4(0.8f, 0.8f, 0.8f, 0.15f)));
-        niebla->addForceGenerator(std::make_shared<WindGenerator>(Vector3D(5, 5, 0), Vector3D(30, 0, 0), 20.0f, 0.5f));
+        niebla->addForceGenerator(std::make_shared<TornadoGenerator>(Vector3D(30, 0, 0), 20.0f, 2.0f, 1.0f, 0.0f, 30.0f));
         systems.push_back(std::move(niebla));
 
         auto chispas = std::make_unique<ParticleSystem>(1000);

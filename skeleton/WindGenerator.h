@@ -8,17 +8,14 @@ public:
 
     void updateForce(Particle* p, double dt) override;
 
-    void toggle() { active = !active; }
-    void setActive(bool a) { active = a; }
-
 protected:
-    virtual Vector3D windAt(const Vector3D& pos) const { return wind; }   // el torbellino lo sobrescribirá
+    virtual Vector3D windAt(const Vector3D& pos) const { return wind; }   // para el tornado
 
     bool inside(const Vector3D& pos) const;
 
     Vector3D wind;      // velocidad del viento
     Vector3D pos;       // posiciond e la fuerza
-    float dist;       // distancia de la fuerza
-    float k1, k2;       // k2 = 0 por ahora, como pide el enunciado
+    float dist;         // distancia de la fuerza
+    float k1, k2;       // Componente de rozamiento de las particulas
     bool active = true;
 };

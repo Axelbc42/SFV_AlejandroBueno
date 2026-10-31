@@ -8,7 +8,7 @@ void WindGenerator::updateForce(Particle* p, double dt) {
     if (!active || !inside(p->getPos())) return;
 
     Vector3D dv = windAt(p->getPos()) - p->getVel();     // vv - v
-    float mod = std::sqrt(dv.x * dv.x + dv.y * dv.y + dv.z * dv.z);
+    float mod = sqrt(dv.x * dv.x + dv.y * dv.y + dv.z * dv.z);
 
     p->addForce(dv * k1 + dv * (k2 * mod));              // F = k1*(vv-v) + k2*|vv-v|*(vv-v)
 }
