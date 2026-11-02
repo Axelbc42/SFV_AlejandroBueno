@@ -295,6 +295,7 @@
     <ClInclude Include="SceneP12.h" />
     <ClInclude Include="SceneP2.h" />
     <ClInclude Include="SceneP3.h" />
+    <ClInclude Include="SceneProyect.h" />
     <ClInclude Include="TornadoGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="WindGenerator.h" />
