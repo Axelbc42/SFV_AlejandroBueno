@@ -20,9 +20,7 @@ public:
 	void integrateVerlet(double t);
 
 	void addForce(const Vector3D& f) { force = force + f; }
-	//void clearForce() { force = Vector3D(0, 0, 0); }
 	float getMass() const { return mass; }
-	//float getInvMass() const { return invMass; }
 	Vector3D getVel() const { return vel; }
 	bool isAlive() const { return alive; }
 
