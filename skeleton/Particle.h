@@ -37,7 +37,7 @@ protected:
 	bool firstVerletStep = true;
 	float lifeTime;
 	float life = 0.0f;
-	bool alive = false;
+	bool alive = true;
 
 	physx::PxTransform pose;	// A renderItem le pasaremos la direccion de este pose, para que se actualice automaticamente
 	physx::PxVec3 prevPos;		// Solo necesario para Verlet

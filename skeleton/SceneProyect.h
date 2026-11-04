@@ -12,12 +12,12 @@ public:
     void init() override {
         seaTr.assign(seaWidth * seaWidth, physx::PxTransform(physx::PxVec3(0, 0, 0)));
         seaItems.assign(seaWidth * seaWidth, nullptr);
-        float half = (seaWidth - 1) * cellSize * 0.5f;
+        float gridHalf = (seaWidth - 1) * cellSize * 0.5f;
 
         for (int x = 0; x < seaWidth; x++) {
             for (int z = 0; z < seaWidth; z++) {
                 int i = x * seaWidth + z;
-                seaTr[i].p = physx::PxVec3(x * cellSize - half, 0.0f, z * cellSize - half);
+                seaTr[i].p = physx::PxVec3(x * cellSize - gridHalf, 0.0f, z * cellSize - gridHalf);
 
                 seaItems[i] = new RenderItem(
                     CreateShape(physx::PxBoxGeometry(cellSize * 0.5f, 0.25f, cellSize * 0.5f)),
@@ -26,18 +26,40 @@ public:
             }
         }
 
-        auto niebla = std::make_unique<ParticleSystem>(10000, 50);
+        float seaHalf = seaWidth * cellSize * 0.5f;
+        float maxDist = seaHalf * 0.7f * 2;
+        auto niebla = std::make_unique<ParticleSystem>(3600, maxDist);
         niebla->addEmitter(ParticleGenerator(
-            Vector3D(0, 2, 0), Vector3D(20, 1.5f, 20),
+            Vector3D(0, 2, 0), Vector3D(seaHalf, 1.5f, seaHalf),
             true, Vector3D(0, 0.5f, 0), Vector3D(0.5f, 0.3f, 0.5f),
             5, 2,
             6.0f, 1.0f,
             0.05f, 0.99,
             Vector4(0.8f, 0.8f, 0.8f, 0.15f)));
         niebla->addForceGenerator(std::make_shared<TornadoGenerator>(Vector3D(0, 1.5f, 0), 10.0f, 0.5f, 2.0f, 0.0f, 10.0f));
+
+        Vector3D corners[4] = {
+            Vector3D(-seaHalf, 2, -seaHalf),
+            Vector3D(seaHalf, 2, -seaHalf),
+            Vector3D(seaHalf, 2,  seaHalf),
+            Vector3D(-seaHalf, 2,  seaHalf)
+        };
+
+        for (int i = 0; i < 4; i++) {
+            Vector3D d = corners[(i + 1) % 4] - corners[i];
+            Vector3D windVel = d * 0.1f;
+
+            niebla->addForceGenerator(std::make_shared<WindGenerator>(windVel, corners[i], seaHalf, 1.0f));
+        }
+
+        boat = new Particle(Vector3D(40, 2, 40), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 20.0f, 1.0f, 0.0f, Vector4(0, 0, 0, 1));
+        niebla->addExternalParticle(boat);
         systems.push_back(std::move(niebla));
 
-
+  //      auto mar = std::make_unique<ParticleSystem>(5, maxDist);
+  //      mar->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(-1, 0, -1)));
+  //      mar->addExternalParticle(boat);
+		//systems.push_back(std::move(mar));
     }
 
     void update(double dt) override {
@@ -46,6 +68,7 @@ public:
         for (auto& s : systems)
             s->update(dt);
 
+        // Mueve el mar
         for (int x = 0; x < seaWidth; x++) {
             for (int z = 0; z < seaWidth; z++) {
                 float distance = (float)(x + z);
@@ -63,24 +86,26 @@ public:
         systems.clear();
 
         for (auto* item : seaItems) {
-            // Libéralos igual que haces en Particle::deactivate() (desregistrar y luego delete)
-            // DeregisterRenderItem(item);
-            // delete item;
+            item->release();
         }
         seaItems.clear();
         seaTr.clear();
+
+		boat->deactivate();
     }
 
 private:
     std::vector<std::unique_ptr<ParticleSystem>> systems;
 
-    int   seaWidth = 20;
+    int   seaWidth = 50;
     float cellSize = 2.0f;
-    float waveSpeed = 0.5f;
+    float waveSpeed = 0.75;
     float waveFrequency = 0.5f;
     float waveMaxHeight = 0.5f;
     float time = 0.0f;
 
     std::vector<physx::PxTransform> seaTr;   // un transform por celda
     std::vector<RenderItem*> seaItems;       // un RenderItem por celda
+
+	Particle* boat = nullptr;
 };

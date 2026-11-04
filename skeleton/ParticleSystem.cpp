@@ -24,13 +24,16 @@ bool ParticleSystem::outOfBounds(const Vector3D& p) const {
 
 void ParticleSystem::update(double t) {
 	// 0) generadores dinámicos (explosivos)
-	for (auto& g : generators) g->update(t);
+	for (auto& g : generators) 
+		g->update(t);
 
 	// 1) emisión
-	int n = emitter->numToEmit();
-	for (int i = 0; i < n && aliveCount < pool.size(); ++i) {
-		emitter->setup(*pool[aliveCount], gravity);
-		++aliveCount;
+	if (emitter) {
+		int n = emitter->numToEmit();
+		for (int i = 0; i < n && aliveCount < pool.size(); ++i) {
+			emitter->setup(*pool[aliveCount], gravity);
+			++aliveCount;
+		}
 	}
 
 	// 2) acumular fuerzas de todos los generadores
@@ -49,4 +52,14 @@ void ParticleSystem::update(double t) {
 		else 
 			++i;
 	}
+
+	// 4) Actualización de las particulas externas (No se reciclan)
+	for (Particle* e : external)
+		e->integrateEulerSI(t);
+}
+
+void ParticleSystem::addExternalParticle(Particle* p) {
+	for (auto& fg : generators)
+		registry.add(p, fg.get());
+	external.push_back(p);
 }

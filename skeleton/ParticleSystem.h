@@ -11,6 +11,8 @@ public:
 	void addEmitter(const ParticleGenerator& gen);
 	void addForceGenerator(std::shared_ptr<ForceGenerator> fg);
 
+	void addExternalParticle(Particle* p);
+
 private:
 	bool outOfBounds(const Vector3D& p) const;
 
@@ -22,5 +24,7 @@ private:
 
 	std::vector<std::shared_ptr<ForceGenerator>> generators;
 	ParticleForceRegistry registry;
+
+	std::vector<Particle*> external;
 };
 
