@@ -32,7 +32,7 @@ Vector3D ParticleGenerator::uniformVel() {
 
 int ParticleGenerator::numToEmit() {
 	std::uniform_real_distribution<float> U(-1.f, 1.f);
-	return lround(particlesMean + U(rng) * particlesVar);
+	return particlesMean + U(rng) * particlesVar;
 }
 
 void ParticleGenerator::setup(Particle& p, const Vector3D& g) {

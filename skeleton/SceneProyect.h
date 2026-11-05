@@ -101,7 +101,8 @@ public:
         seaItems.clear();
         seaTr.clear();
 
-		boat->deactivate();
+		delete boat;
+		boat = nullptr;
     }
 
 private:
