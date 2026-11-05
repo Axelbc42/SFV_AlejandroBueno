@@ -16,7 +16,7 @@ public:
 	Particle& operator=(const Particle&) = delete;
 
 	void integrateEuler(double t);
-	void integrateEulerSI(double t);
+	virtual void integrateEulerSI(double t);
 	void integrateVerlet(double t);
 
 	void addForce(const Vector3D& f) { force = force + f; }

@@ -1,4 +1,5 @@
 #include "ParticleSystem.h"
+#include "Boat.h"
 
 ParticleSystem::ParticleSystem(int maxParticles, float maxDist)
 	: maxDistance(maxDist), gravity(0, -10.0, 0) {
@@ -53,13 +54,15 @@ void ParticleSystem::update(double t) {
 			++i;
 	}
 
-	// 4) Actualización de las particulas externas (No se reciclan)
-	for (Particle* e : external)
-		e->integrateEulerSI(t);
+	// 4) Si hay barco, lo actualiza
+	if (boat != nullptr) {
+		registry.updateBoat(t);
+		boat->integrateEulerSI(t);
+	}
 }
 
-void ParticleSystem::addExternalParticle(Particle* p) {
+void ParticleSystem::addBoat(Boat* p) {
+	boat = p;
 	for (auto& fg : generators)
-		registry.add(p, fg.get());
-	external.push_back(p);
+		registry.add(boat, fg.get());
 }

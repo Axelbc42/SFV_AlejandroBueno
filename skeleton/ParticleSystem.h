@@ -3,6 +3,8 @@
 #include "ParticleGenerator.h"
 #include "ParticleForceRegistry.h"
 
+class Boat;
+
 class ParticleSystem {
 public:
 	ParticleSystem(int maxParticles, float maxDist = 100.0f);
@@ -11,7 +13,8 @@ public:
 	void addEmitter(const ParticleGenerator& gen);
 	void addForceGenerator(std::shared_ptr<ForceGenerator> fg);
 
-	void addExternalParticle(Particle* p);
+	void addBoat(Boat* p);
+	void updateBoat(double t);
 
 private:
 	bool outOfBounds(const Vector3D& p) const;
@@ -25,6 +28,6 @@ private:
 	std::vector<std::shared_ptr<ForceGenerator>> generators;
 	ParticleForceRegistry registry;
 
-	std::vector<Particle*> external;
+	Boat* boat = nullptr;
 };
 

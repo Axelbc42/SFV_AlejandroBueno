@@ -12,8 +12,17 @@ public:
                 r.fg->updateForce(r.p, dt);
     }
 
+    void updateBoat(double dt) {
+        for (auto& r : bRegistry)
+            if (r.b->isAlive())
+				r.fg->updateForce(r.b, dt);
+	}
+
 private:
     struct Pair { Particle* p; ForceGenerator* fg; };
     std::vector<Pair> registry;
+
+    struct bFG { Boat* b; ForceGenerator* fg; };
+    std::vector<bFG> bRegistry;
 };
 

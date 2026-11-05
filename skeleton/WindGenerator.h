@@ -7,9 +7,10 @@ public:
     WindGenerator(const Vector3D& windVel, const Vector3D& center, float radius, float k1, float k2 = 0.0f);
 
     void updateForce(Particle* p, double dt) override;
+    void updateForce(Boat* b, double dt) override;
 
 protected:
-    virtual Vector3D windAt(const Vector3D& pos) const { return wind; }   // para el tornado
+    virtual Vector3D windAt(const Vector3D& pos) const { return wind; }
 
     bool inside(const Vector3D& pos) const;
 

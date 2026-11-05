@@ -42,7 +42,7 @@ Particle::~Particle() {
 
 bool Particle::updateLife(double t) {
 	integrateEulerSI(t);
-	life += (float)t;
+	life += t;
 	return life < lifeTime;
 }
 

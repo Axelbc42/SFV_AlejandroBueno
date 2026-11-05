@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include "Particle.h"
+#include "Boat.h"
 
 class SceneProyect : public Scene {
 public:
@@ -52,14 +53,14 @@ public:
             niebla->addForceGenerator(std::make_shared<WindGenerator>(windVel, corners[i], seaHalf, 1.0f));
         }
 
-        boat = new Particle(Vector3D(40, 2, 40), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 20.0f, 1.0f, 0.0f, Vector4(0, 0, 0, 1));
-        niebla->addExternalParticle(boat);
+        boat = new Boat(Vector3D(40, 2, 40), Vector3D(0, 0, 0), 2.0f, Vector3D(0, 0, 0), 20.0f, 0.1f, 0.0f, Vector4(0, 0, 0, 1));
+        niebla->addBoat(boat);
         systems.push_back(std::move(niebla));
 
-  //      auto mar = std::make_unique<ParticleSystem>(5, maxDist);
-  //      mar->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(-1, 0, -1)));
-  //      mar->addExternalParticle(boat);
-		//systems.push_back(std::move(mar));
+        auto mar = std::make_unique<ParticleSystem>(5, maxDist);
+        mar->addForceGenerator(std::make_shared<GravityGenerator>(Vector3D(-0.25f, 0, -0.25f)));
+        mar->addBoat(boat);
+		systems.push_back(std::move(mar));
     }
 
     void update(double dt) override {
@@ -79,7 +80,16 @@ public:
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
-
+        switch (key) {
+        case 'j':
+            boat->rotateBoat(ROTATION_ANGLE);
+            break;
+        case 'l':
+            boat->rotateBoat(-ROTATION_ANGLE);
+            break;
+        default:
+            break;
+        }
     }
 
     void cleanup() override {
@@ -103,9 +113,10 @@ private:
     float waveFrequency = 0.5f;
     float waveMaxHeight = 0.5f;
     float time = 0.0f;
+	const float ROTATION_ANGLE = physx::PxPi / 8.0f;    // 22.5 grados
 
     std::vector<physx::PxTransform> seaTr;   // un transform por celda
     std::vector<RenderItem*> seaItems;       // un RenderItem por celda
 
-	Particle* boat = nullptr;
+    Boat* boat = nullptr;
 };

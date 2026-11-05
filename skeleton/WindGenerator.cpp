@@ -13,6 +13,18 @@ void WindGenerator::updateForce(Particle* p, double dt) {
     p->addForce(dv * k1 + dv * (k2 * mod));              // F = k1*(vv-v) + k2*|vv-v|*(vv-v)
 }
 
+void WindGenerator::updateForce(Boat* b, double dt) {
+    if (!active || !inside(b->getPos())) return;
+
+    Vector3D fwd = b->getRotDir();
+    Vector3D vel = b->getVel();
+
+    Vector3D dv = windAt(b->getPos()) - vel;
+    float mod = (dv.x * dv.x + dv.y * dv.y + dv.z * dv.z);
+
+    b->addForce(dv * k1 + dv * (k2 * mod));
+}
+
 bool WindGenerator::inside(const Vector3D& pPos) const {
     Vector3D d = pPos - pos;
     return d.x * d.x + d.y * d.y + d.z * d.z < dist * dist;
