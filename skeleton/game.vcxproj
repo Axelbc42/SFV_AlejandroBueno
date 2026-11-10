@@ -262,6 +262,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boat.cpp" />
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="main.cpp" />
@@ -274,12 +275,15 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="TornadoGenerator.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnchoredSpringFG.h" />
     <ClInclude Include="Boat.h" />
+    <ClInclude Include="BuoyancyForceGenerator.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ExplosionGenerator.h" />
@@ -299,7 +303,9 @@
     <ClInclude Include="SceneP12.h" />
     <ClInclude Include="SceneP2.h" />
     <ClInclude Include="SceneP3.h" />
+    <ClInclude Include="SceneP4.h" />
     <ClInclude Include="SceneProyect.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="TornadoGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="WindGenerator.h" />

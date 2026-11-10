@@ -67,6 +67,10 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
         changeScene("Escena4");
         return; // Consumimos el evento para que no interfiera con la escena
     }
+    else if (key == '5') {
+        changeScene("Escena5");
+        return; // Consumimos el evento para que no interfiera con la escena
+    }
     else if (key == '0') {
         changeScene("EscenaP");
         return; // Consumimos el evento para que no interfiera con la escena

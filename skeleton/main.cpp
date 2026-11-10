@@ -25,6 +25,7 @@
 #include "SceneP12.h"
 #include "SceneP2.h"
 #include "SceneP3.h"
+#include "SceneP4.h"
 #include "SceneProyect.h"
 
 #include <foundation/PxSimpleTypes.h>
@@ -111,11 +112,12 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<SceneP12>("Escena2");
 	SceneManager::instance().registerScene<SceneP2>("Escena3");
 	SceneManager::instance().registerScene<SceneP3>("Escena4");
+	SceneManager::instance().registerScene<SceneP4>("Escena5");
 
 	SceneManager::instance().registerScene<SceneProyect>("EscenaP");
 	
 	// Cargar la escena inicial
-	SceneManager::instance().changeScene("EscenaP");
+	SceneManager::instance().changeScene("Escena5");
 	
 }
 

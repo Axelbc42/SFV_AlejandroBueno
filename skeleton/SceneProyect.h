@@ -72,7 +72,7 @@ public:
         // Mueve el mar
         for (int x = 0; x < seaWidth; x++) {
             for (int z = 0; z < seaWidth; z++) {
-                float distance = (float)(x + z);
+                float distance = (x + z);
                 float offset = std::sin(time * waveSpeed + distance * waveFrequency) * waveMaxHeight;
                 seaTr[x * seaWidth + z].p.y = offset;
             }

@@ -21,6 +21,8 @@
     <ClCompile Include="WindGenerator.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="Boat.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -51,6 +53,10 @@
     <ClInclude Include="SceneProyect.h" />
     <ClInclude Include="ExplosionGenerator.h" />
     <ClInclude Include="Boat.h" />
+    <ClInclude Include="SceneP4.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
+    <ClInclude Include="AnchoredSpringFG.h" />
+    <ClInclude Include="BuoyancyForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
