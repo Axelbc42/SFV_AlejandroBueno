@@ -57,6 +57,7 @@
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="AnchoredSpringFG.h" />
     <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="RubberBandFG.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

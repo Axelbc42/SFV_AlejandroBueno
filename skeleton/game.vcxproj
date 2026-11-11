@@ -292,6 +292,7 @@
     <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="RubberBandFG.h" />
     <ClInclude Include="SceneP11.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Projectile.h" />

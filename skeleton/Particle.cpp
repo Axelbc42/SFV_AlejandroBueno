@@ -1,9 +1,22 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, float life, Vector4 color, double Damping) :
+Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float m, float r, float life, Vector4 color, double Damping, Type type) :
 	vel(Vel), acc(Acc), pose(Pos), mass(m), invMass(1/m), damping(Damping), lifeTime(life) {
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(r)), &pose, color);
+	switch (type)
+	{
+	case SPHERE:
+		renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(r)), &pose, color);
+		break;
+	case CUBE:
+		renderItem = new RenderItem(CreateShape(physx::PxBoxGeometry(r, r, r)), &pose, color);
+		break;
+	case PLANE:
+		renderItem = new RenderItem(CreateShape(physx::PxBoxGeometry(r, r / 10.0f, r)), &pose, color);
+		break;
+	default:
+		break;
+	}
 }
 
 Particle::Particle() : vel(0, 0, 0), acc(0, 0, 0), mass(0.1f), invMass(1/ 0.1f), damping(0.99), lifeTime(0.0f) {}
