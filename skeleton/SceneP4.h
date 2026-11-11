@@ -13,27 +13,27 @@ public:
     explicit SceneP4(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
-        _p1 = new Particle(Vector3D(-15, 5, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0));
-        _anchored = new AnchoredSpringFG(0.1, 10, Vector3D(-15, 10, 0));
+        _p1 = new Particle(Vector3D(-15, 5, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1, 1, 0.0, Vector4(0, 1, 0, 1), 0.99, SPHERE);
+        _anchored = new AnchoredSpringFG(2, 10, Vector3D(-15, 10, 0));
         _gravityG = new GravityGenerator(Vector3D(0, -9.8, 0));
         _registry.add(_p1, _anchored);
 
-        _p2 = new Particle(Vector3D(50, 10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0));
-        _p3 = new Particle(Vector3D(20, 10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0));
-        _spring2 = new SpringForceGenerator(0.1, 20, _p2);
-        _spring3 = new SpringForceGenerator(0.1, 20, _p3);
+        _p2 = new Particle(Vector3D(50, 10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1);
+        _p3 = new Particle(Vector3D(20, 10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1);
+        _spring2 = new SpringForceGenerator(1, 20, _p2);
+        _spring3 = new SpringForceGenerator(1, 20, _p3);
 
-        _p4 = new Particle(Vector3D(50, -10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0));
-        _p5 = new Particle(Vector3D(20, -10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0));
-        _spring4 = new RubberBandFG(0.1, 20, _p4);
-        _spring5 = new RubberBandFG(0.1, 20, _p5);
+        _p4 = new Particle(Vector3D(50, -10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1);
+        _p5 = new Particle(Vector3D(20, -10, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1);
+        _spring4 = new RubberBandFG(1, 20, _p4);
+        _spring5 = new RubberBandFG(1, 20, _p5);
 
         _registry.add(_p3, _spring2);
         _registry.add(_p2, _spring3);
         _registry.add(_p5, _spring4);
         _registry.add(_p4, _spring5);
 
-		_p6 = new Particle(Vector3D(0, -15, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1, 1, 0.0, Vector4(1, 1, 0, 1), 0.99, SPHERE);
+		_p6 = new Particle(Vector3D(0, -15, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 10, 1, 0.0, Vector4(1, 1, 0, 1), 0.99, SPHERE);
 		_buoyancy = new BuoyancyForceGenerator(1, 1, 1000, new Particle(Vector3D(0, -20, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0), 1, 10, 0.0, Vector4(0, 0, 1, 1), 0.99, PLANE));
 		_registry.add(_p6, _buoyancy);
 		_registry.add(_p6, _gravityG);
